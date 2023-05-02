@@ -54,7 +54,7 @@ status INT(1) NOT NULL,
 created DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
 updated DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
 FOREIGN KEY (user_id) REFERENCES users(id),
-FOREIGN KEY (recipient_id) REFERENCES accounts(id)
+FOREIGN KEY (recipient_id) REFERENCES users(id)
 );
 
 -- Default user1
