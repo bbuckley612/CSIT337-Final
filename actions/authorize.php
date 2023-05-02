@@ -75,6 +75,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		    try {
 		      mysqli_query($conn, "INSERT INTO `users` (`first`, `last`, `email`, `hash`) VALUES ('$first', '$last', '$email', '$hash')");
 
+		      $last_id = mysqli_insert_id($conn);
+		      mysqli_query($conn, "INSERT INTO `accounts` (`user_id`, `name`, `priority`) VALUES ('$last_id', '" . $first . "''s PayPartner Balance', 1)");
+
 		      // New account is authorized! Let's call the cookie function
 		      setLoginCookie($email);
 		    } 
