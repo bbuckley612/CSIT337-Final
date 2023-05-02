@@ -1,0 +1,105 @@
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  background: linear-gradient(#96CC5C, #086600);
+}
+
+.card {
+  background: #ffffffbf;
+}
+
+.card.card-light {
+  background: #ffffffa8;
+  box-shadow: 0px 3px 15px 0px #00000024;
+}
+
+.card.card-dark {
+  background: #00000099;
+  box-shadow: 0px 3px 15px 0px #000;
+}
+
+.primary-link {
+  color: #0045f3;
+  font-size: 13pt;
+  font-weight: 500;
+  margin-top: 10px;
+  display: inline-block;
+}
+
+.nav-link {
+  color: #0045f3;
+  font-weight: 600;
+  font-size: 13pt;
+  cursor: pointer;
+}
+
+.transact-body {
+  padding: 12px;
+}
+
+.transact-icon {
+  width: 35px;
+  height: 35px;
+  margin: auto;
+  border: 2px solid #000;
+  border-radius: 50%;
+  font-weight: 700;
+  text-align: center;
+  font-family: math;
+  color: #fff;
+  background: #000;
+}
+
+.transact-icon.pending {
+  background: #5a5a5a;
+  font-size: 13pt;
+  line-height: 1.75;
+}
+
+.transact-icon.pending:after {
+  content: '⧖';
+}
+
+.transact-icon.add {
+  background: #155600;
+  font-size: 16pt;
+  line-height: 1.4;
+}
+
+.transact-icon.add:after {
+  content: '+';
+}
+
+.transact-icon.subtract {
+  background: #792b00;
+  font-size: 17pt;
+  line-height: 1.45;
+}
+
+.transact-icon.subtract:after {
+  content: '﹣';
+}
+
+.transact-icon.transfer {
+  background: #004789;
+  font-size: 15pt;
+  font-weight: 500;
+}
+
+.transact-icon.transfer:after {
+  content: '⇌';
+}
+
+.transact-desc {
+  margin: 0;
+}
+
+.transact-txt {
+  font-size: 10pt;
+  font-weight: 400;
+  margin: 0;
+}
