@@ -15,7 +15,7 @@
               <label class="fw-bold" for="first">First Name:</label>
             </td>
             <td class="col-8">
-              <input class="w-100" type="text" id="first" name="first" value="<?php echo $_SESSION['first']; ?>" required />
+              <input class="w-100" type="text" id="first" name="first" value="<?php echo $_SESSION['user_first']; ?>" required />
             </td>
           </tr>
           <tr class="row py-1">
@@ -23,7 +23,7 @@
               <label class="fw-bold" for="last">Last Name:</label>
             </td>
             <td class="col-8">
-              <input class="w-100" type="text" id="last" name="last" value="<?php echo $_SESSION['last']; ?>" required />
+              <input class="w-100" type="text" id="last" name="last" value="<?php echo $_SESSION['user_last']; ?>" required />
             </td>
           </tr>
           <tr class="row py-1">
@@ -31,7 +31,7 @@
               <label class="fw-bold" for="email">Email:</label>
             </td>
             <td class="col-8">
-              <input class="w-100" type="email" id="email" name="email" value="<?php echo $_SESSION['email']; ?>" required />
+              <input class="w-100" type="email" id="email" name="email" value="<?php echo $_SESSION['user_email']; ?>" required />
             </td>
           </tr>
           <tr class="row py-1">

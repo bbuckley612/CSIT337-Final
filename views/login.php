@@ -15,7 +15,7 @@
               <label class="fw-bold" for="email">Email:</label>
             </td>
             <td class="col-8">
-              <input class="w-100" type="email" id="email" name="email" value="<?php echo $_SESSION['email']; ?>" required />
+              <input class="w-100" type="email" id="email" name="email" value="<?php echo $_SESSION['user_email']; ?>" required />
             </td>
           </tr>
           <tr class="row py-1">

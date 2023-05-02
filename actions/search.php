@@ -8,7 +8,7 @@
  * - On success, returns matching users in JSON format
  */
 
-$sql = "SELECT `uid`, `first`, `last`, `email` FROM `users` WHERE `enabled` = 1 AND ";
+$sql = "SELECT `id`, `first`, `last`, `email` FROM `users` WHERE `enabled` = 1 AND ";
 
 $query = filter_input(INPUT_POST, 'query', FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_BACKTICK);
 

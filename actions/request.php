@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Try to execute SQL statement
     try {
-      mysqli_query($conn, "INSERT INTO `invoices` (`uid`, `sender`, `recipient`, `amount`, `desc`, `status`) VALUES ($uid, '$sender', '$recipient', '$amount', '$desc', 1)");
+      mysqli_query($conn, "INSERT INTO `invoices` (`user_id`, `sender`, `recipient`, `amount`, `desc`, `status`) VALUES ($uid, '$sender', '$recipient', '$amount', '$desc', 1)");
 
       // New account is authorized! Let's call the cookie function
       header('Location: ./?view=main&try=request&success=1');

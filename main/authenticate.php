@@ -21,14 +21,14 @@ function goToLogin() {
 
 if (!empty($_COOKIE['login'])) {
   $cookie = filter_input(INPUT_COOKIE, 'login', FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_BACKTICK);
-  $sql = "SELECT `uid`, `first`, `last`, `email` FROM `users` WHERE `cookie` = '$cookie' LIMIT 1";
+  $sql = "SELECT `id`, `first`, `last`, `email` FROM `users` WHERE `cookie` = '$cookie' LIMIT 1";
   $result = $conn->query($sql);
   if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
-      $_SESSION['uid'] = $row['uid'];
-      $_SESSION['first'] = $row['first'];
-      $_SESSION['last'] = $row['last'];
-      $_SESSION['email'] = $row['email'];
+      $_SESSION['user_id'] = $row['id'];
+      $_SESSION['user_first'] = $row['first'];
+      $_SESSION['user_last'] = $row['last'];
+      $_SESSION['user_email'] = $row['email'];
     }
   } else {
     goToLogin();

@@ -1,7 +1,7 @@
-<h1 class="text-center mt-4 m=t-md-5 mb-0 fw-bolder">Hello, <?php echo $_SESSION['first'] . " " . $_SESSION['last']; ?>!</h1>
+<h1 class="text-center mt-4 m=t-md-5 mb-0 fw-bolder">Hello, <?php echo $_SESSION['user_first'] . " " . $_SESSION['user_last']; ?>!</h1>
 
 <p class="text-center mt-2 mb-1">
-	<i><?php echo $_SESSION['email']; ?></i>
+	<i><?php echo $_SESSION['user_email']; ?></i>
 </p>
 
 <p class="text-center mb-4">

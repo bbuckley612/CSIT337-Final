@@ -46,7 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	// Data sanitization
   $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_BACKTICK);
   $password = filter_input(INPUT_POST, 'password', FILTER_UNSAFE_RAW);
-  $_SESSION['email'] = $email;
+  $_SESSION['user_email'] = $email;
 
 
   /* HANDLE NEW ACCOUNT */
@@ -57,8 +57,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   	$first = filter_input(INPUT_POST, 'first', FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_BACKTICK);
   	$last = filter_input(INPUT_POST, 'last', FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_BACKTICK);
   	$retype = filter_input(INPUT_POST, 'retype', FILTER_UNSAFE_RAW);
-  	$_SESSION['first'] = $first;
-  	$_SESSION['last'] = $last;
+  	$_SESSION['user_first'] = $first;
+  	$_SESSION['user_last'] = $last;
 
   	// Data validation
   	if (filter_var($email, FILTER_VALIDATE_EMAIL)) {

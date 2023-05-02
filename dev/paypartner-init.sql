@@ -6,41 +6,55 @@ USE PayPartner;
 
 -- CREATE TABLE users;
 CREATE TABLE users (
-uid INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-first varchar(30) NOT NULL,
-last varchar(30) NOT NULL,
-email varchar(50) NOT NULL UNIQUE,
-hash varchar(150) NOT NULL,
-cookie varchar(50),
+id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+first VARCHAR(50) NOT NULL,
+last VARCHAR(50) NOT NULL,
+email VARCHAR(255) NOT NULL UNIQUE,
+hash VARCHAR(150) NOT NULL,
+cookie VARCHAR(150),
 created DATE NOT NULL DEFAULT CURRENT_TIMESTAMP,
 updated DATE NOT NULL DEFAULT CURRENT_TIMESTAMP,
 enabled BIT(1) DEFAULT 1
 );
 
+-- CREATE TABLE accounts;
+CREATE TABLE accounts (
+id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+user_id INT(11) NOT NULL,
+routing_num VARCHAR(50) NOT NULL,
+account_num VARCHAR(50) NOT NULL,
+name VARCHAR(150) NOT NULL,
+priority INT(2) DEFAULT 0,
+created DATE NOT NULL DEFAULT CURRENT_TIMESTAMP,
+updated DATE NOT NULL DEFAULT CURRENT_TIMESTAMP,
+enabled BIT(1) DEFAULT 1,
+FOREIGN KEY (user_id) REFERENCES users(id)
+);
+
 -- CREATE TABLE transactions;
 CREATE TABLE transactions (
 id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-uid INT(11) NOT NULL,
-sender INT(11) NOT NULL,
-isSenderPeer BIT(1),
-recipient INT(11) NOT NULL,
-isRecipientPeer BIT(1),
-amount FLOAT(7,2) NOT NULL,
-description varchar(150) NOT NULL,
-created DATE NOT NULL DEFAULT CURRENT_TIMESTAMP
+user_id INT(11) NOT NULL,
+recipient_id INT(11) NOT NULL,
+amount DECIMAL(10,2) NOT NULL,
+description VARCHAR(150) NOT NULL,
+created DATE NOT NULL DEFAULT CURRENT_TIMESTAMP,
+FOREIGN KEY (user_id) REFERENCES users(id),
+FOREIGN KEY (recipient_id) REFERENCES accounts(id)
 );
 
 -- CREATE TABLE invoices;
 CREATE TABLE invoices (
 id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-uid INT(11) NOT NULL,
-sender INT(11) NOT NULL,
-recipient INT(11) NOT NULL,
-amount FLOAT(7,2) NOT NULL,
-desc varchar(150) NOT NULL,
+user_id INT(11) NOT NULL,
+recipient_id INT(11) NOT NULL,
+amount DECIMAL(10,2) NOT NULL,
+description VARCHAR(150) NOT NULL,
+status INT(1) NOT NULL,
 created DATE NOT NULL DEFAULT CURRENT_TIMESTAMP,
 updated DATE NOT NULL DEFAULT CURRENT_TIMESTAMP,
-status INT(1)
+FOREIGN KEY (user_id) REFERENCES users(id),
+FOREIGN KEY (recipient_id) REFERENCES accounts(id)
 );
 
 
