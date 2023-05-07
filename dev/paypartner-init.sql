@@ -50,32 +50,48 @@ user_id INT(11) NOT NULL,
 recipient_id INT(11) NOT NULL,
 amount DECIMAL(10,2) NOT NULL,
 description VARCHAR(150) NOT NULL,
-status INT(1) NOT NULL,
+status INT(1) NOT NULL DEFAULT 1,
 created DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
 updated DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
 FOREIGN KEY (user_id) REFERENCES users(id),
 FOREIGN KEY (recipient_id) REFERENCES users(id)
 );
 
--- Default user1
+-- create default user1
 INSERT INTO `users` (`first`, `last`, `email`, `hash`)
 VALUES ('Alice', 'Smith', 'alice@example.com', '$2y$10$oEaMUDzFJ3unxY9B5qRHouq7wZ3cueKkGAtyfqWIpvwaVb65R/lwK');
 INSERT INTO `accounts` (`user_id`, `name`, `priority`)
 VALUES ('1', 'Alice\'s PayPartner Balance', '1');
+INSERT INTO `accounts` (`user_id`, `routing_num`, `account_num`, `name`)
+VALUES ('1', '12345678', 'ABCDEFGHIJKLM', 'Alice\'s Bank (Checking)');
 
--- Default user2
+-- create default user2
 INSERT INTO `users` (`first`, `last`, `email`, `hash`)
 VALUES ('Bob', 'Lee', 'bob@example.com', '$2y$10$oEaMUDzFJ3unxY9B5qRHouq7wZ3cueKkGAtyfqWIpvwaVb65R/lwK');
 INSERT INTO `accounts` (`user_id`, `name`, `priority`)
 VALUES ('2', 'Bob\'s PayPartner Balance', '1');
-INSERT INTO `accounts` (`user_id`, `routing_num`, `account_num`, `name`)
-VALUES ('2', '12345678', 'ABCDEFGHIJKLM', 'Bob\'s Bank (Checking)');
+INSERT INTO `accounts` (`user_id`, `routing_num`, `account_num`, `name`, `priority`)
+VALUES ('2', '12345678', 'ABCDEFGHIJKLM', 'Bob\'s Bank (Checking)', 2);
 INSERT INTO `accounts` (`user_id`, `routing_num`, `account_num`, `name`)
 VALUES ('2', '12345678', 'NOPQRSTUVWXYZ', 'Bob\'s Bank (Savings)');
-INSERT INTO `transactions` (`account_id`, `recipient_id`, `amount`, `description`)
-VALUES ('2', '3', '3.14', 'Initial Deposit');
 
--- create the users and grant priveleges to those users
+-- create default transactions
+INSERT INTO `transactions` (`account_id`, `recipient_id`, `amount`, `description`)
+VALUES ('2', '1', '100.00', 'Initial Deposit');
+INSERT INTO `transactions` (`account_id`, `recipient_id`, `amount`, `description`)
+VALUES ('4', '3', '100.00', 'Initial Deposit');
+INSERT INTO `transactions` (`account_id`, `recipient_id`, `amount`, `description`)
+VALUES ('4', '1', '50.00', 'One metric ton of chocolate');
+INSERT INTO `transactions` (`account_id`, `recipient_id`, `amount`, `description`)
+VALUES ('1', '3', '3.14', 'Slice of pie');
+
+-- create default invoices
+INSERT INTO `invoices` (`user_id`, `recipient_id`, `amount`, `description`)
+VALUES ('1', '2', '25.00', 'Gas money');
+INSERT INTO `invoices` (`user_id`, `recipient_id`, `amount`, `description`)
+VALUES ('2', '1', '11.11', 'Movie ticket');
+
+-- grant priveleges
 GRANT SELECT, INSERT, DELETE, UPDATE
 ON PayPartner.*
 TO paypartner@localhost
