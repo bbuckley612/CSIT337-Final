@@ -64,6 +64,16 @@ body {
   content: '⧖';
 }
 
+.transact-icon.request {
+  background: #8d7e00;
+  font-size: 11pt;
+  line-height: 2.2;
+}
+
+.transact-icon.request:after {
+  content: '⚠';
+}
+
 .transact-icon.add {
   background: #155600;
   font-size: 16pt;

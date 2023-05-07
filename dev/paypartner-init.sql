@@ -34,12 +34,12 @@ FOREIGN KEY (user_id) REFERENCES users(id)
 -- CREATE TABLE transactions;
 CREATE TABLE transactions (
 id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-user_id INT(11) NOT NULL,
+account_id INT(11) NOT NULL,
 recipient_id INT(11) NOT NULL,
 amount DECIMAL(10,2) NOT NULL,
 description VARCHAR(150) NOT NULL,
 created DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-FOREIGN KEY (user_id) REFERENCES users(id),
+FOREIGN KEY (account_id) REFERENCES accounts(id),
 FOREIGN KEY (recipient_id) REFERENCES accounts(id)
 );
 
@@ -60,14 +60,20 @@ FOREIGN KEY (recipient_id) REFERENCES users(id)
 -- Default user1
 INSERT INTO `users` (`first`, `last`, `email`, `hash`)
 VALUES ('Alice', 'Smith', 'alice@example.com', '$2y$10$oEaMUDzFJ3unxY9B5qRHouq7wZ3cueKkGAtyfqWIpvwaVb65R/lwK');
-INSERT INTO `accounts` (`user_id`, `name`, `priority`) 
+INSERT INTO `accounts` (`user_id`, `name`, `priority`)
 VALUES ('1', 'Alice\'s PayPartner Balance', '1');
 
 -- Default user2
 INSERT INTO `users` (`first`, `last`, `email`, `hash`)
 VALUES ('Bob', 'Lee', 'bob@example.com', '$2y$10$oEaMUDzFJ3unxY9B5qRHouq7wZ3cueKkGAtyfqWIpvwaVb65R/lwK');
-INSERT INTO `accounts` (`user_id`, `name`, `priority`) 
+INSERT INTO `accounts` (`user_id`, `name`, `priority`)
 VALUES ('2', 'Bob\'s PayPartner Balance', '1');
+INSERT INTO `accounts` (`user_id`, `routing_num`, `account_num`, `name`)
+VALUES ('2', '12345678', 'ABCDEFGHIJKLM', 'Bob\'s Bank (Checking)');
+INSERT INTO `accounts` (`user_id`, `routing_num`, `account_num`, `name`)
+VALUES ('2', '12345678', 'NOPQRSTUVWXYZ', 'Bob\'s Bank (Savings)');
+INSERT INTO `transactions` (`account_id`, `recipient_id`, `amount`, `description`)
+VALUES ('2', '3', '3.14', 'Initial Deposit');
 
 -- create the users and grant priveleges to those users
 GRANT SELECT, INSERT, DELETE, UPDATE

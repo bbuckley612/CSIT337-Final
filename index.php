@@ -16,7 +16,7 @@ if (!empty($_GET['action'])) {
   mysqli_close($conn);
   exit();
 
-// Root Directory Router
+// Parameter Router
 } else if (empty($_GET['view'])) {
   $url = $_SERVER['REQUEST_URI'];
   $url .= (parse_url($url, PHP_URL_QUERY) ? '&' : '?') . 'view=main';

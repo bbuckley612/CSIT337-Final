@@ -1,8 +1,8 @@
 <?php
 
 /**
- * REQUEST.PHP
- * This file requires POST data. It handles all invoice creations.
+ * PAY.PHP
+ * This file requires POST data. It handles all P2P payments.
  * - Request data is sanitized and validated
  * - Database queries:
  *  - Recipient's user id is selected from database
@@ -26,9 +26,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       
         // Try to execute SQL statements
         try {
-          $result = mysqli_query($conn, "SELECT id FROM users WHERE email = '$recipient' LIMIT 1");
-          $recipient_id = mysqli_fetch_row($result)[0];
-          mysqli_query($conn, "INSERT INTO `invoices` (`user_id`, `recipient_id`, `amount`, `description`, `status`) VALUES ($user_id, $recipient_id, '$amount', '$description', 1)");
+          $recipient_result = mysqli_query($conn, "SELECT a.id FROM users AS u
+                                        LEFT JOIN accounts AS a ON a.user_id = u.id
+                                        WHERE u.email = '$recipient' AND a.priority = 1 LIMIT 1");
+          
+          $user_result = mysqli_query($conn, "SELECT a.id FROM users AS u
+                                        LEFT JOIN accounts AS a ON a.user_id = u.id
+                                        WHERE u.id = $user_id AND a.priority = 1 LIMIT 1");
+
+          $recipient_acct = mysqli_fetch_row($recipient_result)[0];
+          $user_acct = mysqli_fetch_row($user_result)[0];
+
+          mysqli_query($conn, "INSERT INTO `transactions` (`account_id`, `recipient_id`, `amount`, `description`) VALUES ($user_acct, $recipient_acct, '$amount', '$description')");
 
           // New invoice created! Let's redirect to success message
           header('Location: ./?view=main&try=request&success=true');
